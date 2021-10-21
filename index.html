@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <title>Mars Weather Report</title>
+</head>
+<body>
+    <!-- page header -->
+    <header>
+        <h1 id="header">Mars Weather Report</h1>
+    </header>
+
+    <!-- search bar div -->
+    <div class="search-bar">
+            <!-- form for text and submit button -->
+        <form class="city-form">
+          <input type="text" name="city" class="city-input" id="city" autofocus="true" placeholder="Search City" required/>
+          <button type="submit" class="btn">Search</button>
+        </form>
+    </div>
+
+    <!-- section for cards in body -->
+    <section id="results">
+        <!-- first card being city results -->
+        <article class="location-card">
+            <!-- heading for city results -->
+            <h2 class="location-name" id="location-city">
+                City Location</h2>
+                <!-- uonordered list, (may use other elements for results) -->
+            <ul>
+                <li>Post</li>
+                <li>Results</li>
+                <li>Here</li>
+            </ul>
+        </article>
+        <!-- end first card -->
+
+        <!-- second card being comparison -->
+        <article class="comparison-card">
+            <!-- image added and styled (might not keep style here) -->
+            <img src="https://www.extremetech.com/wp-content/uploads/2015/12/insight-640x353.jpg" style="height:200px; width: 300px; padding:20px;">
+            <!-- unordered list at the moment for preview -->
+            <ul>
+                <li>Comparison</li>
+                <li>Information</li>
+            </ul>
+        </article>
+        <!-- end second card -->
+
+        <!-- third card being mars location -->
+        <article class="location-card">
+            <!-- heading -->
+            <h2 class="location-name" id="location-mars">
+                Mars Location</h2>
+            <ul>
+                <li>Post</li>
+                <li>Results</li>
+                <li>Here</li>
+            </ul>
+        </article>
+        <!-- end third card -->
+    </section>
+    <!-- end section  -->
+
+    <footer>
+        <h2 id="footer">Created by Hailey Thomas & Angel Rios</h2>
+    </footer>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
