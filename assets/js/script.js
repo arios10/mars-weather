@@ -1,24 +1,80 @@
-var getTemp = function() {
+// VARIABLES
+var formEl = document.querySelector(".city-form");
+var inputEl = document.querySelector("#city");
+var city;
+var latitude;
+var longitude;
+var roverContainer = document.getElementById("rover-container");
+var roverImgUrl;
+
+// FORM SUBMIT HANDLER
+var formSubmitHandler = function (event) {
+    // prevent page from reloading
+    event.preventDefault();
+    // get value from input element
+    city = inputEl.value.trim();
+    // run get city function
+    getCity();
+};
+
+// GET CITY
+var getCity = function () {
+    // format api url
+    var cityApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + "6ff484b66ed5b4a802761c069566a64c";
+    // make fetch request
+    fetch(cityApiUrl).then(function (response) {
+        //request was successful
+        if (response.ok) {
+            // get data from response
+            response.json().then(function (data) {
+                // loop over fetch response
+                for (var i = 0; i < data.length; i++) {
+                    // create variables
+                    latitude = data[i].lat;
+                    longitude = data[i].lon;
+                    // run get city weather function
+                    getCityWeather();
+                };
+            });
+        } else {
+            alert("Location API error!")
+        };
+    })
+};
+
+// GET CITY WEATHER
+var getCityWeather = function () {
+    // get weather api url
+    var cityWeatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=" + "hourly,minutely" + "&units=" + "imperial" + "&appid=" + "d50140606331b5f0875df8b66c236b78";
+    // fetch weather api url
+    fetch(cityWeatherApiUrl)
+        // get and parse response
+        .then(function (response) {
+            return response.json();
+        })
+        // get data and log
+        .then(function (data) {
+            console.log(data);
+        });
+};
+
+// GET MARS TEMP
+var getTemp = function () {
     var apiUrl = "https://api.nasa.gov/insight_weather/?api_key=DEMO_KEY&feedtype=json&ver=1.0";
 
-    fetch(apiUrl).then(function(response) {
-        if(response.ok) {
-            console.log(response);                                                    {
-            response.json().then(function(data) {
-                console.log(data);
-            });
+    fetch(apiUrl).then(function (response) {
+        if (response.ok) {
+            console.log(response); {
+                response.json().then(function (data) {
+                    console.log(data);
+                });
+            }
         }
-    }
         else {
             console.log("NOT working");
         }
     });
 };
-
-getTemp();
-// VARIABLES
-var roverContainer = document.getElementById("rover-container");
-var roverImgUrl;
 
 // GET ROVER IMAGE
 var getRoverImg = function () {
@@ -45,5 +101,9 @@ var getRoverImg = function () {
     });
 };
 
-// CALL FUNCTION
+// CALL FUNCTIONS
+getTemp();
 getRoverImg();
+
+// SUBMIT CITY EVENT LISTENER
+formEl.addEventListener("submit", formSubmitHandler);
