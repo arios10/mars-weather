@@ -6,6 +6,7 @@ var latitude;
 var longitude;
 var roverContainer = document.getElementById("rover-container");
 var roverImgUrl;
+var marsTemp;
 
 // FORM SUBMIT HANDLER
 var formSubmitHandler = function (event) {
@@ -60,16 +61,23 @@ var getCityWeather = function () {
 
 // GET MARS TEMP
 var getTemp = function () {
+    //url variable
     var apiUrl = "https://api.nasa.gov/insight_weather/?api_key=DEMO_KEY&feedtype=json&ver=1.0";
-
+    //fetch request
     fetch(apiUrl).then(function (response) {
+        //if successful
         if (response.ok) {
-            console.log(response); {
-                response.json().then(function (data) {
-                    console.log(data);
-                });
-            }
+            //console log
+            console.log(response);
+            response.json().then(function (data) {
+                console.log(data);
+                //set temp
+                marsTemp = data.sol_keys[0].AT.av;
+                //log
+                console.log(marsTemp);
+            });
         }
+        //else url not working
         else {
             console.log("NOT working");
         }
